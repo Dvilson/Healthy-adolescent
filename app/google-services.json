@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "370192287371",
+    "firebase_url": "https://healthy-adolescent.firebaseio.com",
+    "project_id": "healthy-adolescent",
+    "storage_bucket": "healthy-adolescent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370192287371:android:0fa3e68bf751ca4eb6b68e",
+        "android_client_info": {
+          "package_name": "com.dvilson.healthyadolescent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370192287371-dqlkcr7i6n5f65q55vu3kdd91skr9u41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZK32hjvn2GHpa82PVE26dyDehm4stZeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370192287371-dqlkcr7i6n5f65q55vu3kdd91skr9u41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
