@@ -4,6 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
+    tools:context=".SplashScreen"
+    android:background="@drawable/ic_splash_screen_bg">
+
+    <TextView
+        android:id="@+id/activity_splash_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Healthy Adolescent"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:fontFamily="@font/allentown_personal"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="182dp"
+        tools:layout_editor_absoluteY="290dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
