@@ -7,11 +7,12 @@
     tools:context=".MainActivity"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     >
      <com.google.android.material.navigation.NavigationView
          android:id="@+id/nav_view"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
          android:layout_gravity="start"
          app:headerLayout="@layout/nav_header"
          app:menu="@menu/nav_drawer_menu"
@@ -46,7 +47,7 @@
           <FrameLayout
               android:id="@+id/frame_contenair"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="match_parent"
               android:layout_alignBottom="@id/nav_bottom"
               android:layout_marginBottom="0dp">
 

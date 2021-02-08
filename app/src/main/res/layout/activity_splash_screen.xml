@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/activity_splash_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Healthy Adolescent"
+        android:layout_gravity=""
         android:textStyle="bold"
         android:textSize="30sp"
         android:fontFamily="@font/allentown_personal"

@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationViewEx mBottomNavigationViewEx;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
@@ -42,21 +42,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView = findViewById(R.id.nav_view);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToolbar = findViewById(R.id.main_toolbar);
+        mBottomNavigationViewEx = findViewById(R.id.nav_bottom);
         setSupportActionBar(mToolbar);
 
-        //mNavigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        mNavigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
+        mBottomNavigationViewEx.setOnNavigationItemSelectedListener(this);
 
-        /*mFragmentManager = getSupportFragmentManager();
+
+        mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         homeFragment = new HomeFragment();
         mFragmentTransaction.replace(R.id.frame_contenair, homeFragment);
-        mFragmentTransaction.commit(); */
+        mFragmentTransaction.commit();
 
         init();
+
     }
 
     public void init() {
@@ -87,17 +91,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navigation_bar_menu, menu);
-        //getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -105,23 +108,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_home:
-                mFragmentManager = getSupportFragmentManager();
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                homeFragment = new HomeFragment();
-                mFragmentTransaction.replace(R.id.frame_contenair, homeFragment);
-                mFragmentTransaction.commit();
+            case R.id.main_menu_logout:
+
+
                 return true;
 
-            case R.id.menu_item_profil:
-                mFragmentManager = getSupportFragmentManager();
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                profilFragment = new ProfilFragment();
-                mFragmentTransaction.replace(R.id.frame_contenair, profilFragment);
-                mFragmentTransaction.commit();
-                return true;
-            case R.id.main_menu_logout:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -129,8 +120,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return true;
+
+            switch (item.getItemId()) {
+                case R.id.menu_item_home:
+                    mFragmentManager = getSupportFragmentManager();
+                    mFragmentTransaction = mFragmentManager.beginTransaction();
+                    homeFragment = new HomeFragment();
+                    mFragmentTransaction.replace(R.id.frame_contenair, homeFragment);
+                    mFragmentTransaction.commit();
+                    return true;
+
+                case R.id.menu_item_profil:
+                    mFragmentManager = getSupportFragmentManager();
+                    mFragmentTransaction = mFragmentManager.beginTransaction();
+                    profilFragment = new ProfilFragment();
+                    mFragmentTransaction.replace(R.id.frame_contenair, profilFragment);
+                    mFragmentTransaction.commit();
+                    return true;
+                default:
+                    return true;
+            }
+
+
+
     }
+
 }

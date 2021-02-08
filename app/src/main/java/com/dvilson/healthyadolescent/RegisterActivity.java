@@ -2,6 +2,7 @@ package com.dvilson.healthyadolescent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dvilson.healthyadolescent.models.User;
+import com.dvilson.healthyadolescent.viewmodels.LoginRegisterViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,13 +32,14 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
-    EditText fullName, pseudo,email,password,confirmPassword;
+    TextInputEditText mEditTexFullName, mEditTextPseudo,mEditTextEmail,mEditTextPassword,mEditTextConfirmPassword;
     Button signUp;
     TextView singIn;
     FirebaseAuth mAuth;
     ProgressBar mProgressBar;
     FirebaseDatabase mDatabase;
     DatabaseReference mReference;
+    LoginRegisterViewModel mViewModel;
 
 
 
@@ -44,28 +48,19 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         init();
+        mViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(LoginRegisterViewModel.class);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isEmpty(pseudo.getText().toString())
-                        && !isEmpty(fullName.getText().toString())
-                        && !isEmpty(email.getText().toString())
-                        && !isEmpty(password.getText().toString())
-                        && !isEmpty(confirmPassword.getText().toString())){
+                String pseudo = mEditTextPseudo.getText().toString().trim();
+                String fullName = mEditTexFullName.getText().toString().trim();
+                String email = mEditTextEmail.getText().toString().trim();
+                String password = mEditTextPassword.getText().toString().trim();
+                String confirmPassword= mEditTextConfirmPassword.getText().toString().trim();
+                mViewModel.register(email,password,confirmPassword,pseudo,fullName);
 
-                    if(isValidEmail(email.getText().toString())){
-                        if(doStringMatch(password.getText().toString().trim(),confirmPassword.getText().toString().trim())){
-                            mProgressBar.setVisibility(View.VISIBLE);
-                            register(email.getText().toString().trim(),password.getText().toString().trim());
-                        }
-                    }else{
-                        Toast.makeText(RegisterActivity.this,"Please Enter a valid address email",Toast.LENGTH_LONG).show();
-                    }
 
-                }else{
-                    Toast.makeText(RegisterActivity.this,"Please  fill out all the fields",Toast.LENGTH_LONG).show();
-                }
             }
         });
 
@@ -74,11 +69,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void init(){
 
-        fullName = findViewById(R.id.activity_register_edit_txt_full_name);
-        pseudo = findViewById(R.id.activity_register_edit_txt_pseudo);
-        email = findViewById(R.id.activity_register_edit_txt_email);
-        password = findViewById(R.id.activity_register_edit_txt_password);
-        confirmPassword = findViewById(R.id.activity_register_edit_txt_confirm_password);
+        mEditTexFullName = findViewById(R.id.activity_register_edit_full_name);
+        mEditTextPseudo = findViewById(R.id.activity_register_edit_pseudo);
+        mEditTextEmail = findViewById(R.id.activity_register_edit_email);
+        mEditTextPassword = findViewById(R.id.activity_register_edit_password);
+        mEditTextConfirmPassword= findViewById(R.id.activity_register_edit_confirm_password);
         signUp = findViewById(R.id.activity_register_btn_sign_up);
         singIn = findViewById(R.id.activity_register_tv_sign_in);
         mProgressBar = findViewById(R.id.activity_register_progressBar);
@@ -87,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         mReference = mDatabase.getReference("Users");
 
     }
-     private void register(String email, String password){
+     /*private void register(String email, String password){
          if(mAuth.getCurrentUser() != null){
              Log.d(TAG, "register:"+mAuth.getCurrentUser().getUid());
              mAuth.signOut();
@@ -131,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                          }
                      });
          }
-    }
+    }*/
 
     private boolean isEmpty(String s){
         return s.equals("");

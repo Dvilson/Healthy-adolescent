@@ -9,6 +9,10 @@ public class User {
         this.pseudo = pseudo;
     }
 
+    public User() {
+
+    }
+
     public String getFullName() {
         return fullName;
     }

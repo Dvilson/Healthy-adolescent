@@ -16,12 +16,15 @@ public class LoggedInViewModel  extends AndroidViewModel {
     private MutableLiveData<Boolean>loggedOutLiveData;
 
 
+
     public LoggedInViewModel(@NonNull Application application) {
         super(application);
         mAuthAppRepository = new AuthAppRepository(application);
         userLiveData = mAuthAppRepository.getUserLiveData();
         loggedOutLiveData = mAuthAppRepository.getLoggetOutLiveData();
     }
+
+
 
     public void logOut(){
         mAuthAppRepository.logOut();
